@@ -1,3 +1,4 @@
+// src/Components/Header.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import jsPDF from 'jspdf';
@@ -97,6 +98,7 @@ const Header = () => {
           <FaSearch className="search-icon" />
         </div>
         <div className="navbar-links">
+          <button onClick={generatePDF} className="download-button">Download Report</button>
           {isAuthenticated ? (
             <button onClick={handleLogout} className="login-button">Logout</button>
           ) : (
@@ -107,9 +109,8 @@ const Header = () => {
         </div>
       </nav>
       <div className="table-container">
-        <h2>Hospital Data</h2>
-        <button onClick={generatePDF} className="download-button">Download Report</button>
-        <table>
+        <h2>Hospital Equipment List</h2>
+        <table className="styled-table">
           <thead>
             <tr>
               <th>Name</th>
@@ -117,6 +118,7 @@ const Header = () => {
               <th>Capacity</th>
               <th>Specialties</th>
               <th>Machines</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -134,6 +136,9 @@ const Header = () => {
                       </li>
                     ))}
                   </ul>
+                </td>
+                <td>
+                  <button className="view-button" onClick={() => navigate(`/hospital/${hospital._id}`)}>View</button>
                 </td>
               </tr>
             ))}
